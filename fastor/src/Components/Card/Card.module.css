@@ -1,0 +1,29 @@
+.mainBox{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    cursor: pointer;
+}
+.imgBox{
+    width: 122px;
+height: 118px;
+top: 790px;
+left: 24px;
+border-radius: 14px;
+
+}
+.cake{
+    height: 100%;
+    width: 100%;
+    border-radius: 14px;
+}
+.four{
+color: red;
+}
+.lowerBox{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

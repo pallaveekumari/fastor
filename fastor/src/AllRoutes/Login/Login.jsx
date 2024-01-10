@@ -6,16 +6,26 @@ const Login = () => {
   const [mobileNumber, setMobileNumber] = useState("");
   const navigate = useNavigate();
   const handleProceed = async () => {
-    let formData = new FormData();
+    const formData = new URLSearchParams();
     formData.append("phone", mobileNumber);
     formData.append("dial_code", "+91");
     try {
       let res = await fetch("https://staging.fastor.in/v1/pwa/user/register", {
         method: "POST",
-        body: formData,
+        headers:{
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: formData.toString(),
       });
       let data = await res.json();
-      navigate("/otp");
+      // console.log(data)
+      if(data.status_code==200){
+        localStorage.setItem('phone',mobileNumber);
+        alert('OTP sent successfully')
+        navigate("/otp");
+      }else{
+        alert('Signup Failed')
+      }
     } catch (err) {
       console.log(err);
     }

@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../Components/Navbar/Navbar";
 import styles from "./Restaurant.module.css";
+import Card from "../../Components/Card/Card";
+import { useNavigate } from "react-router-dom";
 const Restaurant = () => {
   const [data, setData] = useState([]);
-
-  const handleSubmit = async () => {
+  const navigate = useNavigate();
+  const handleFetch = async () => {
     try {
+      let token = localStorage.getItem("token");
       const response = await fetch(
-        "https://staging.fastor.in/v1/m/restaurant?city_id=118&&"
+        "https://staging.fastor.in/v1/m/restaurant?city_id=118",
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       if (!response.ok) {
         throw new Error("Failed to fetch");
@@ -20,8 +29,13 @@ const Restaurant = () => {
     }
   };
   useEffect(() => {
-    handleSubmit();
+    handleFetch();
   }, []);
+
+  const handleClickRestaurant = (data) => {
+    localStorage.setItem("product", JSON.stringify(data));
+    navigate("/restaurantDetails");
+  };
 
   return (
     <div>
@@ -34,6 +48,19 @@ const Restaurant = () => {
             alt=""
           />
         </div>
+        {data &&
+          data.map((el, i) => {
+            return (
+              <div
+                key={i}
+                onClick={() => {
+                  handleClickRestaurant(el);
+                }}
+              >
+                <Card restaurant={el} />
+              </div>
+            );
+          })}
       </div>
     </div>
   );
