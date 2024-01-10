@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from "./RestaurantDetails.module.css"
 import Card from '../../Components/Card/Card';
+import Navbar from '../../Components/Navbar/Navbar';
 
 const RestaurantDetails = () => {
     const [data,setData] = useState();
@@ -11,6 +12,7 @@ const RestaurantDetails = () => {
     },[])
   return (
     <div>
+        <Navbar/>
       {data && <Card restaurant={data} />}
     </div>
   )
