@@ -1,0 +1,19 @@
+.container{
+    width: 375px;
+height: 1475px;
+
+border: 1px solid red;
+margin: auto;
+
+}
+.veggieBox{
+    height: 8rem;
+    width: 90%;
+border-radius: 15px;
+margin: auto;
+}
+.veggieBoximg{
+    height: 100%;
+    width: 100%;
+    border-radius: 15px;
+}
